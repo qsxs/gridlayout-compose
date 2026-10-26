@@ -12,7 +12,7 @@ Kotlin/KGP/Native/Compose compiler 固定 `2.4.20-0.1.0-08`，Compose 依赖固�
 
 第二次云试点已实际通过宿主 Python/Native bootstrap、Prepare、Tasks 与 Resolve，随后 Metadata 的标准 `commonizeNativeDistribution` 因 CPF 仓内容白名单漏掉 commonizer JVM 工具而失败。`commonizer-toolchain.json` 仅新增固定 `.08` 的 `kotlin-klib-commonizer-embeddable`，其 compiler/stdlib 等传递闭包复用原八项 launcher 内容锁；这是一套独立 host 工具输入，既不作为 metadata JavaExec 的第九项 launcher，也不加入 117/15 库依赖图。POM 原件与工具 JAR 来源/大小/SHA256 一并保留，构建配方身份包含该新清单与 POM。
 
-Resolve 现在会提前解析原 KGP 的 `kotlinKlibCommonizerClasspath`，记录其边和实际九项工具 JAR，并按精确 GAV、大小和 SHA256 校验，避免冷工具缺项继续到 Metadata 才发现。标准 commonization、源集与双 ABI 校验保持启用。这个冷工具闭包修正尚未运行真实 Gradle 或第三次云试点，不能据第二次 Resolve 通过推定新闭包已成功。
+Resolve 现在会提前解析原 KGP 的 `kotlinKlibCommonizerClasspath`，记录其边和实际九项工具 JAR，并按精确 GAV、大小和 SHA256 校验，避免冷工具缺项继续到 Metadata 才发现。标准 commonization、源集与双 ABI 校验保持启用。第三轮已实际执行该 commonizer 任务通过；后续 metadata 的 Compose compiler 插件缺项已按下述独立锁修正，修正后的完整可控 CI 仍待运行。
 
 ## 独立使用
 
@@ -74,7 +74,7 @@ JitPack 候选坐标为 `com.github.qsxs.gridlayout-compose:grid:<immutable-comm
 
 安装脚本从成功 Prepare 的现有摘要取得实际 work 路径；仅某阶段失败时，将该阶段 stdout/stderr 文件的最后各 80 行输出到云日志，并保留原失败退出码。不会输出 invocation JSON 或环境，也不把日志放入 Maven。成功路径保持原八阶段链和双 ABI 校验。
 
-这些文件是第二个候选入口。JitPack 修正后的实际冷构建、15 分钟上限、Konan 按需下载、最终 root/leaf 重定向 GMM/klib 下载和匿名消费均为 NOT_RUN，不能据此宣布 JitPack 已支持。最终验收需要匿名、隔离的远端 consumer，既不使用应用源码、producer 工作区，也不输入开发机 MavenLocal；metadata 和双 ABI 均须通过。
+这些文件保留为 JitPack 历史候选入口，三轮试点已停止，不再追加 JitPack 试点。完整 metadata/双 ABI 制品、最终 root/leaf 重定向 GMM/klib 下载和匿名消费仍未验收，后续改由可控 CI 执行，不能据此宣布发布可用。最终验收需要匿名、隔离的远端 consumer，既不使用应用源码、producer 工作区，也不输入开发机 MavenLocal；metadata 和双 ABI 均须通过。
 
 ## 上游同步与来源
 
@@ -83,3 +83,9 @@ JitPack 候选坐标为 `com.github.qsxs.gridlayout-compose:grid:<immutable-comm
 原构建配方与校验取自应用冻结 commit `fe48ee6140d9224adf56b4b09efcfdc468ae8aa0` 的 `harmony-build/ports/grid`，公共工具最小闭包从同 commit 的 `ports/materialkolor/MaterialKolorPort.py` 抽取并参数化，未带入应用业务或凭据。工具来源、Apache-2.0 授权和原作者署名说明见独立工具仓 `PROVENANCE.json` 与 `NOTICE`。Grid 原源遵循 Apache-2.0，原许可证不变。
 
 当前交付边界：完成独立入口的静态实现；Python/JSON 与轻量 helper 语义检查不能替代 Resolve、metadata、双 ABI、Publish/Verify、公开匿名下载或运行验证。所有真实 producer/发布/运行结论均等待维护者复审和资源窗口。
+
+## 可控 CI 与临时 Pages 验收
+
+JitPack 三轮试点已结束。第三轮 commonizer 已执行通过，后续 metadata 编译器插件 classpath 暴露 Compose compiler 工具仓白名单缺项；它没有改变库或 Native 基线。`compiler-plugin-toolchain.json` 单独锁定 `.08` Compose compiler JAR 和无依赖 POM，Resolve 从 metadata、OHOS x64/arm64 三个原 KGP 编译任务的公开 `compilerPluginClasspath` 取得真实输入，逐项核字节与完整集合；原八项 launcher、commonizer 九项工具及 117/15 业务图均保持。
+
+后续改用公共工具仓默认分支中的手动 GitHub Actions producer，固定 Grid 40 位 SHA，显式 JDK17/Python3.13、隔离临时目录，执行完整 Publish/Verify 后上传完整 staging 与必要 evidence。新 CI 尚未实际运行。Actions artifacts 只作中转；Root 下载验收后才手动推到独立 `qsxs/cpf-maven` Pages 作临时匿名验收，不自动部署，不改变 App 引用，也不把 MavenCentral/R2 作为本轮部署目标。

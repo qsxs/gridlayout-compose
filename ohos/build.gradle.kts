@@ -38,6 +38,10 @@ val commonizerTools = readMap(file("commonizer-toolchain.json"))
 val commonizerPins = launcherPins + asMap(commonizerTools.getValue("pins"))
 val commonizerArtifacts = launcherArtifacts + asMap(commonizerTools.getValue("artifacts"))
 check(commonizerTools["compilerVersion"] == config["kotlin"])
+val compilerPluginTools = readMap(file("compiler-plugin-toolchain.json"))
+val compilerPluginPins = asMap(compilerPluginTools.getValue("pins"))
+val compilerPluginArtifacts = asMap(compilerPluginTools.getValue("artifacts"))
+check(compilerPluginTools["compilerVersion"] == config["kotlin"])
 val fingerprint = providers.gradleProperty("portFingerprint").get()
 val work = file(providers.gradleProperty("portWork").get()).canonicalFile
 check(fingerprint.matches(Regex("[0-9a-f]{64}")))
@@ -281,13 +285,30 @@ fun commonizerRecords(): Map<String, Any> {
         "artifacts" to artifacts.sortedBy { it.getValue("gav").toString() })
 }
 
+fun compilerPluginRecords() = (compilerPluginTools.getValue("compilerTasks") as List<*>).map { taskName ->
+    val compiler = tasks.getByName(taskName.toString()) as KotlinNativeCompile
+    val files = compiler.compilerPluginClasspath?.files.orEmpty()
+    val artifacts = files.map { file ->
+        val hash = sha(file)
+        val matched = compilerPluginArtifacts.entries.singleOrNull { (_, value) ->
+            val expected = asMap(value)
+            hash == expected.getValue("sha256") && file.length() == (expected.getValue("size") as Number).toLong()
+        } ?: error("Unreviewed compiler plugin bytes for ${compiler.path}: $file")
+        mapOf("gav" to "${matched.key}:${compilerPluginPins.getValue(matched.key)}", "path" to file.absolutePath,
+            "size" to file.length(), "sha256" to hash)
+    }
+    check(artifacts.size == compilerPluginPins.size && artifacts.map { it.getValue("gav") }.toSet() ==
+        compilerPluginPins.map { "${it.key}:${it.value}" }.toSet()) { "Compiler plugin set differs for ${compiler.path}" }
+    mapOf("task" to compiler.path, "artifacts" to artifacts.sortedBy { it.getValue("gav").toString() })
+}
+
 tasks.register("resolveGrid") {
     doLast {
         check(gradle.gradleVersion == config.getValue("gradle"))
         listOf("compileCommonMainKotlinMetadata", "compileCommonMainWithMetadataCli", "allMetadataJar", "compileKotlinOhosX64", "compileKotlinOhosArm64").forEach { tasks.getByName(it) }
         evidence("resolve", mapOf("fingerprint" to fingerprint, "toolchain" to toolchain(),
             "metadataLauncher" to metadataLauncherRecords(configurations.getByName("commonMetadataCliLauncher")),
-            "commonizer" to commonizerRecords(), "configurations" to resolution()))
+            "commonizer" to commonizerRecords(), "compilerPlugins" to compilerPluginRecords(), "configurations" to resolution()))
     }
 }
 fun recordStage(name: String, target: String?) {

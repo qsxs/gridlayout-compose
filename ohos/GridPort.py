@@ -103,7 +103,7 @@ def plan():
     config = load(HERE / "port-config.json")
     recipe_names = ["GridPort.py", "build.gradle.kts", "settings.gradle.kts", "gradle.properties",
                     "port-config.json", "source-inputs.json", "dependency-pins.json", "metadata-pins.json",
-                    "metadata-toolchain.json", "commonizer-toolchain.json", "tooling-lock.json", "gradlew", "gradlew.bat",
+                    "metadata-toolchain.json", "commonizer-toolchain.json", "compiler-plugin-toolchain.json", "tooling-lock.json", "gradlew", "gradlew.bat",
                     "gradle/wrapper/gradle-wrapper.jar", "gradle/wrapper/gradle-wrapper.properties"]
     model = load(HERE / "source-inputs.json")
     recipe_names += [model[key]["path"] for key in ("sources", "pom", "gmm", "upstreamBuild", "license")]
@@ -115,6 +115,14 @@ def plan():
     if any(actual_pom[key] != pom[key] for key in ("path", "size", "sha256")):
         raise RuntimeError("Commonizer source POM differs from the pinned original")
     recipe_names.append(pom["path"])
+    compiler_plugin = load(HERE / "compiler-plugin-toolchain.json")
+    if compiler_plugin["compilerVersion"] != config["kotlin"]:
+        raise RuntimeError("Compose compiler plugin version differs from the Kotlin lock")
+    plugin_pom = compiler_plugin["sourcePom"]
+    actual_plugin_pom = record(HERE / plugin_pom["path"], HERE)
+    if any(actual_plugin_pom[key] != plugin_pom[key] for key in ("path", "size", "sha256")):
+        raise RuntimeError("Compose compiler plugin POM differs from the pinned original")
+    recipe_names.append(plugin_pom["path"])
     recipe = [record(HERE / name, HERE) for name in sorted(set(recipe_names))]
     wrapper = config["gradleWrapper"]
     wrapper_inputs = [record(HERE / item["path"], HERE) for item in wrapper["inputs"]]
@@ -182,7 +190,8 @@ def prepare(value):
     config = load(HERE / "port-config.json")
     # 冻结镜像另带 host 工具输入；库的 117/15 项清单保持原样。
     tool_pins = {**load(HERE / "metadata-toolchain.json")["launcherPins"],
-                 **load(HERE / "commonizer-toolchain.json")["pins"]}
+                 **load(HERE / "commonizer-toolchain.json")["pins"],
+                 **load(HERE / "compiler-plugin-toolchain.json")["pins"]}
     mirror = PORT.mirror_cache(work, {**pins, **tool_pins}, cache_root=OPTIONS.maven_cache,
                               gradle_api=tuple(config["gradle"].split(".")), tool_allowlist=config["toolAllowlist"])
     write(existing, {**value, "frozenInputs": mirror, "cachePolicy": cache_paths(work, config),

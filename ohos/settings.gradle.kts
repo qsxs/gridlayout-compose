@@ -17,6 +17,7 @@ val pins = JsonSlurper().parse(file("dependency-pins.json")) as Map<*, *>
 val metadataPins = if (file("metadata-pins.json").isFile) JsonSlurper().parse(file("metadata-pins.json")) as Map<*, *> else emptyMap<Any, Any>()
 val launcherPins = (JsonSlurper().parse(file("metadata-toolchain.json")) as Map<*, *>)["launcherPins"] as Map<*, *>
 val commonizerPins = (JsonSlurper().parse(file("commonizer-toolchain.json")) as Map<*, *>)["pins"] as Map<*, *>
+val compilerPluginPins = (JsonSlurper().parse(file("compiler-plugin-toolchain.json")) as Map<*, *>)["pins"] as Map<*, *>
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -26,13 +27,13 @@ dependencyResolutionManagement {
             if (parts[0].startsWith("androidx.")) includeVersion(parts[0], parts[1], version.toString())
         } } }
         maven("https://maven.eazytec-cloud.com/nexus/repository/maven-develop/") {
-            content { (pins.entries + metadataPins.entries + launcherPins.entries + commonizerPins.entries).forEach { (ga, version) ->
+            content { (pins.entries + metadataPins.entries + launcherPins.entries + commonizerPins.entries + compilerPluginPins.entries).forEach { (ga, version) ->
                 val parts = ga.toString().split(":")
                 includeVersion(parts[0], parts[1], version.toString())
             } }
         }
         maven("https://maven.eazytec-cloud.com/nexus/repository/maven-public/") {
-            content { (pins.entries + metadataPins.entries + launcherPins.entries + commonizerPins.entries).forEach { (ga, version) ->
+            content { (pins.entries + metadataPins.entries + launcherPins.entries + commonizerPins.entries + compilerPluginPins.entries).forEach { (ga, version) ->
                 val parts = ga.toString().split(":")
                 includeVersion(parts[0], parts[1], version.toString())
             } }
