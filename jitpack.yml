@@ -1,0 +1,5 @@
+# 候选入口：远端冷构建与匿名消费尚待实测。
+jdk:
+  - openjdk17
+install:
+  - bash ohos/jitpack-install.sh

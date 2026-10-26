@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "repository": "https://github.com/qsxs/cpf-port-tooling",
+  "revision": "d063c7c70ffbc3f241d7e8bdd184add33dc9a009",
+  "status": "REVIEWED_PUBLIC_COMMIT_REMOTE_VERIFIED",
+  "files": [
+    {
+      "path": "cpf_port_tooling.py",
+      "size": 12413,
+      "sha256": "8ec21ccc19d9c6f4559e0b4600a3c4c6c3e63637c5abcb8579223ac82a530eb9"
+    },
+    {
+      "path": "LICENSE",
+      "size": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    }
+  ]
+}

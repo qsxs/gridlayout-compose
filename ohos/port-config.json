@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "kotlin": "2.4.20-0.1.0-08",
+  "compose": "1.12.0-0.1.0-11",
+  "gradle": "9.5.0",
+  "gradleWrapper": {
+    "inputs": [
+      {
+        "path": "gradle/wrapper/gradle-wrapper.jar",
+        "size": 43764,
+        "sha256": "7d3a4ac4de1c32b59bc6a4eb8ecb8e612ccd0cf1ae1e99f66902da64df296172"
+      },
+      {
+        "path": "gradle/wrapper/gradle-wrapper.properties",
+        "size": 339,
+        "sha256": "93b4f2c5ddcfc9e6f630fc7e004b31b389695cd0228be6da42e196e5d4af7acb"
+      }
+    ],
+    "distributionUrl": "https://services.gradle.org/distributions/gradle-9.5.0-bin.zip",
+    "distributionSha256": "553c78f50dafcd54d65b9a444649057857469edf836431389695608536d6b746"
+  },
+  "kind": "UPSTREAM_GRID_COMPLETE_COMMONMAIN_OHOS_PORT",
+  "metadataPolicy": "PUBLIC_COMMON_METADATA_CLI_AFTER_STANDARD_OPTIONAL_EXPECTATION_FAILURE_NATIVE_STANDARD_KGP",
+  "modules": {
+    "grid": {
+      "group": "com.cheonjaeung.compose.grid",
+      "upstreamVersion": "2.8.0",
+      "privateVersionPrefix": "2.8.0-cpf11",
+      "sourceCount": 18,
+      "license": "Apache-2.0",
+      "repository": "https://github.com/cheonjaeung/gridlayout-compose",
+      "licenseSha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    }
+  },
+  "publication": {
+    "group": "com.github.qsxs.gridlayout-compose",
+    "artifact": "grid",
+    "versionPrefix": "2.8.0-cpf11",
+    "hostingStatus": "JITPACK_CANDIDATE_NOT_VERIFIED"
+  },
+  "toolAllowlist": [
+    {
+      "groupPrefix": "org.jetbrains.kotlin",
+      "versions": [
+        "2.4.20-0.1.0-08",
+        "2.4.20",
+        "1.6.10"
+      ]
+    },
+    {
+      "group": "org.jetbrains.compose",
+      "versions": [
+        "1.12.0-0.1.0-11"
+      ]
+    },
+    {
+      "group": "org.jetbrains",
+      "modules": [
+        "annotations"
+      ],
+      "versions": [
+        "13.0"
+      ]
+    },
+    {
+      "group": "org.jetbrains.kotlinx",
+      "modules": [
+        "kotlinx-coroutines-core-jvm"
+      ],
+      "versions": [
+        "1.8.0"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "status": "JITPACK_CANDIDATE_CLOUD_BUILD_NOT_RUN",
+  "host": "linux-x86_64",
+  "kotlinVersion": "2.4.20-0.1.0-08",
+  "nativeBundle": {
+    "url": "https://maven.eazytec-cloud.com/nexus/repository/maven-develop/org/jetbrains/kotlin/kotlin-native-prebuilt/2.4.20-0.1.0-08/kotlin-native-prebuilt-2.4.20-0.1.0-08-linux-x86_64.tar.gz",
+    "bytes": 177306208,
+    "sha256": "014411e74a0a0733aaf5cdcf7883e1b43c66f5b0a9fec390866bb8d459acad9f",
+    "directory": "kotlin-native-prebuilt-linux-x86_64-2.4.20-0.1.0-08"
+  },
+  "configurationPolicy": "UNMODIFIED_ARCHIVE_KONAN_PROPERTIES_STANDARD_ON_DEMAND_DEPENDENCIES",
+  "publication": {
+    "candidateGroup": "com.github.qsxs.gridlayout-compose",
+    "rootArtifact": "grid",
+    "nativeArtifacts": [
+      "grid-ohosx64",
+      "grid-ohosarm64"
+    ],
+    "versionPolicy": "CHECKED_OUT_COMMIT_OR_TAG_NO_BRANCH_SNAPSHOT"
+  }
+}

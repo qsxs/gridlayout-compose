@@ -1,0 +1,298 @@
+{
+  "schemaVersion": 1,
+  "policy": "COMPLETE_OFFICIAL_COMMONMAIN_SOURCES_ORIGINAL_BYTES_NO_PATCHES",
+  "archiveEntryCount": 25,
+  "kotlinSourceCount": 18,
+  "sourceSetDigest": "SHA256 of compact JSON sorted keys, sorted by member; fields member,size,sha256 for all Kotlin members",
+  "sourceSetSha256": "695ba1f36c450724936ebd69876a636a732c9972cf54f22bb5323d2acadddbb0",
+  "sourceMembers": [
+    {
+      "member": "commonMain/com/cheonjaeung/compose/grid/BoxGridMeasurePolicy.kt",
+      "size": 11285,
+      "sha256": "d8ae7bade4f04142847e5b7b2d5b41f8430c00e348f17cb353e3fc7f0d4396d9"
+    },
+    {
+      "member": "commonMain/com/cheonjaeung/compose/grid/BoxGridScope.kt",
+      "size": 3410,
+      "sha256": "2f64bed8c2aad335a1624c0f957fb675ce4c0f8469d72c4d25368e8f965d581c"
+    },
+    {
+      "member": "commonMain/com/cheonjaeung/compose/grid/BoxGridScopeModifiers.kt",
+      "size": 4048,
+      "sha256": "9d6c9dac277128a93405ec8b795031457dd0f841e3f1b9632e975916d368cd21"
+    },
+    {
+      "member": "commonMain/com/cheonjaeung/compose/grid/BoxGridSpan.kt",
+      "size": 1920,
+      "sha256": "1c08a0370858451ec9940096111abc3663b50547e89cbec422f9c8140ec88827"
+    },
+    {
+      "member": "commonMain/com/cheonjaeung/compose/grid/CollectionUtils.kt",
+      "size": 552,
+      "sha256": "9054de0843c409be265a23dc919db3a6c1faaca6ea6defc18248a707a61c44f8"
+    },
+    {
+      "member": "commonMain/com/cheonjaeung/compose/grid/ExperimentalGridApi.kt",
+      "size": 368,
+      "sha256": "b94fa45f777e9aab85ddadd99a7fb84d0213471b3253a780dd94bfb0d7eefa5b"
+    },
+    {
+      "member": "commonMain/com/cheonjaeung/compose/grid/ExtendedGridCells.kt",
+      "size": 13175,
+      "sha256": "649bfa8d54d71bd70bd9792333c917137d8ecce132ac6c6b502d7279aaf95e1a"
+    },
+    {
+      "member": "commonMain/com/cheonjaeung/compose/grid/Grid.kt",
+      "size": 12504,
+      "sha256": "4fca42c9b05f163e83903f6af141030722949eed81a6ff04396535d48c01798c"
+    },
+    {
+      "member": "commonMain/com/cheonjaeung/compose/grid/GridItemScopeMarker.kt",
+      "size": 165,
+      "sha256": "ba7269951d1304dd1a9b17581e8e7adcff464b98c7de9e54293ec11fa51d82b9"
+    },
+    {
+      "member": "commonMain/com/cheonjaeung/compose/grid/GridItemSpanScope.kt",
+      "size": 647,
+      "sha256": "87eb58a04511019c643569e6e2c174342df697fb230f06eeb71626f9f04c1814"
+    },
+    {
+      "member": "commonMain/com/cheonjaeung/compose/grid/GridScope.kt",
+      "size": 1964,
+      "sha256": "ff1e338e0866f57a96cfb7a25dbeea0c70d93fa9bcd4be27de53202d4f3ffddc"
+    },
+    {
+      "member": "commonMain/com/cheonjaeung/compose/grid/GridScopeModifiers.kt",
+      "size": 4033,
+      "sha256": "78e3c740b4ae7c3c6041670493e302f4fe4a09e95e7d42f51f0fa90d46db2aca"
+    },
+    {
+      "member": "commonMain/com/cheonjaeung/compose/grid/GridTrack.kt",
+      "size": 1030,
+      "sha256": "43e385ad78668e888211b82107903bfa7994d2b870ed2b7ba178b9cb4ade1ce0"
+    },
+    {
+      "member": "commonMain/com/cheonjaeung/compose/grid/LayoutOrientation.kt",
+      "size": 110,
+      "sha256": "1b8e351697e9f236a559ed86a85104cd78a93868d970663cef80ef15c51b2592"
+    },
+    {
+      "member": "commonMain/com/cheonjaeung/compose/grid/MeasurablePlaceableUtils.kt",
+      "size": 976,
+      "sha256": "1c8262ed44931f73bc0798677a1f4879360c5af4c59a4459c9169dbc46a6cdba"
+    },
+    {
+      "member": "commonMain/com/cheonjaeung/compose/grid/OrientationIndependentConstraints.kt",
+      "size": 7263,
+      "sha256": "7d1d444c344f38db9966d6f450d5a821d3303506b34a818d04de42255d5c52fa"
+    },
+    {
+      "member": "commonMain/com/cheonjaeung/compose/grid/SequentialGridMeasurePolicy.kt",
+      "size": 18832,
+      "sha256": "2db479adffecf56efbf1875ec792d4b950f47c5c39fd4ba04c6f4f0f8f84cfc7"
+    },
+    {
+      "member": "commonMain/com/cheonjaeung/compose/grid/SimpleGridCells.kt",
+      "size": 7455,
+      "sha256": "1b65bba7bed0872637b8d0fa56bbc085680866f5558b087cc5773340e8ebf50b"
+    }
+  ],
+  "upstream": {
+    "coordinate": "com.cheonjaeung.compose.grid:grid:2.8.0",
+    "repository": "https://github.com/cheonjaeung/gridlayout-compose",
+    "tag": "v2.8.0",
+    "commit": "cdc87301e25c85639ae2b52603e08915f2d38610",
+    "tree": "18f8fca00a45a8d70215c2b19a0556f1c55d8334",
+    "buildUrl": "https://raw.githubusercontent.com/cheonjaeung/gridlayout-compose/cdc87301e25c85639ae2b52603e08915f2d38610/grid/build.gradle.kts",
+    "dependencyDeclarations": "runtime, foundation and ui-util are implementation; root POM runtime and Native POM compile/GMM kotlin-api are verified separately"
+  },
+  "publicApi": {
+    "policy": "All declarations and implementations, annotations and generated members remain in the complete original source set. This declaration index is not a rewritten ABI dump; the archived sources are canonical for exact signatures/defaults.",
+    "files": [
+      {
+        "member": "commonMain/com/cheonjaeung/compose/grid/BoxGridMeasurePolicy.kt",
+        "declarations": [],
+        "coverage": "COMPLETE_ORIGINAL_SOURCE_COMPILE_AND_PUBLICATION_REQUIRED"
+      },
+      {
+        "member": "commonMain/com/cheonjaeung/compose/grid/BoxGridScope.kt",
+        "declarations": [
+          "BoxGridScope",
+          "BoxGridScope.Modifier.row(Int)",
+          "BoxGridScope.Modifier.column(Int)",
+          "BoxGridScope.Modifier.position(Int, Int)",
+          "BoxGridScope.Modifier.span(BoxGridItemSpanScope.() -> BoxGridItemSpan)?",
+          "BoxGridScope.Modifier.align(Alignment)"
+        ],
+        "coverage": "COMPLETE_ORIGINAL_SOURCE_COMPILE_AND_PUBLICATION_REQUIRED"
+      },
+      {
+        "member": "commonMain/com/cheonjaeung/compose/grid/BoxGridScopeModifiers.kt",
+        "declarations": [],
+        "coverage": "COMPLETE_ORIGINAL_SOURCE_COMPILE_AND_PUBLICATION_REQUIRED"
+      },
+      {
+        "member": "commonMain/com/cheonjaeung/compose/grid/BoxGridSpan.kt",
+        "declarations": [
+          "BoxGridItemSpan(row: Int = 1, column: Int = 1)",
+          "BoxGridItemSpan value class (internal packed constructor)",
+          "BoxGridItemSpan.rowSpan",
+          "BoxGridItemSpan.columnSpan",
+          "BoxGridItemSpan.component1()",
+          "BoxGridItemSpan.component2()",
+          "BoxGridItemSpanScope",
+          "BoxGridItemSpanScope.maxCurrentRowSpan",
+          "BoxGridItemSpanScope.maxCurrentColumnSpan",
+          "BoxGridItemSpanScope.maxRowSpan",
+          "BoxGridItemSpanScope.maxColumnSpan"
+        ],
+        "coverage": "COMPLETE_ORIGINAL_SOURCE_COMPILE_AND_PUBLICATION_REQUIRED"
+      },
+      {
+        "member": "commonMain/com/cheonjaeung/compose/grid/CollectionUtils.kt",
+        "declarations": [],
+        "coverage": "COMPLETE_ORIGINAL_SOURCE_COMPILE_AND_PUBLICATION_REQUIRED"
+      },
+      {
+        "member": "commonMain/com/cheonjaeung/compose/grid/ExperimentalGridApi.kt",
+        "declarations": [
+          "ExperimentalGridApi annotation"
+        ],
+        "coverage": "COMPLETE_ORIGINAL_SOURCE_COMPILE_AND_PUBLICATION_REQUIRED"
+      },
+      {
+        "member": "commonMain/com/cheonjaeung/compose/grid/ExtendedGridCells.kt",
+        "declarations": [
+          "ExtendedGridCells",
+          "ExtendedGridCells.SimpleGridCells",
+          "ExtendedGridCells.SimpleGridCells.Track(List<GridTrack>, fill: Boolean = true)",
+          "ExtendedGridCells.SimpleGridCells.Track(vararg GridTrack, fill: Boolean = true)",
+          "ExtendedGridCells.SimpleGridCells.Responsive(fill: Boolean = true, Density.(Dp) -> SimpleGridCells)",
+          "ExtendedGridCells.GridCells",
+          "ExtendedGridCells.GridCells.Track(List<GridTrack>)",
+          "ExtendedGridCells.GridCells.Track(vararg GridTrack)",
+          "ExtendedGridCells.GridCells.Responsive(Density.(Dp) -> GridCells)",
+          "ExtendedGridCells.StaggeredGridCells",
+          "ExtendedGridCells.StaggeredGridCells.Track(List<GridTrack>)",
+          "ExtendedGridCells.StaggeredGridCells.Track(vararg GridTrack)",
+          "ExtendedGridCells.StaggeredGridCells.Responsive(Density.(Dp) -> StaggeredGridCells)",
+          "Track/Responsive calculateCrossAxisCellSizes/equals/hashCode overrides; SimpleGridCells fillCellSize overrides"
+        ],
+        "coverage": "COMPLETE_ORIGINAL_SOURCE_COMPILE_AND_PUBLICATION_REQUIRED"
+      },
+      {
+        "member": "commonMain/com/cheonjaeung/compose/grid/Grid.kt",
+        "declarations": [
+          "inline fun BoxGrid(\n    rows: SimpleGridCells,\n    columns: SimpleGridCells,\n    modifier: Modifier = Modifier,\n    horizontalSpacing: Dp = 0.dp,\n    verticalSpacing: Dp = 0.dp,\n    contentAlignment: Alignment = Alignment.TopStart,\n    content: @Composable BoxGridScope.() -> Unit\n)",
+          "inline fun HorizontalGrid(\n    rows: SimpleGridCells,\n    modifier: Modifier = Modifier,\n    horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,\n    verticalArrangement: Arrangement.Vertical = Arrangement.Top,\n    contentAlignment: Alignment = Alignment.TopStart,\n    content: @Composable GridScope.() -> Unit\n)",
+          "inline fun VerticalGrid(\n    columns: SimpleGridCells,\n    modifier: Modifier = Modifier,\n    horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,\n    verticalArrangement: Arrangement.Vertical = Arrangement.Top,\n    contentAlignment: Alignment = Alignment.TopStart,\n    content: @Composable GridScope.() -> Unit\n)"
+        ],
+        "coverage": "COMPLETE_ORIGINAL_SOURCE_COMPILE_AND_PUBLICATION_REQUIRED"
+      },
+      {
+        "member": "commonMain/com/cheonjaeung/compose/grid/GridItemScopeMarker.kt",
+        "declarations": [
+          "GridItemScopeMarker annotation"
+        ],
+        "coverage": "COMPLETE_ORIGINAL_SOURCE_COMPILE_AND_PUBLICATION_REQUIRED"
+      },
+      {
+        "member": "commonMain/com/cheonjaeung/compose/grid/GridItemSpanScope.kt",
+        "declarations": [
+          "GridItemSpanScope",
+          "GridItemSpanScope.maxCurrentLineSpan",
+          "GridItemSpanScope.maxLineSpan"
+        ],
+        "coverage": "COMPLETE_ORIGINAL_SOURCE_COMPILE_AND_PUBLICATION_REQUIRED"
+      },
+      {
+        "member": "commonMain/com/cheonjaeung/compose/grid/GridScope.kt",
+        "declarations": [
+          "GridScope",
+          "GridScope.Modifier.span((GridItemSpanScope.() -> Int)? = null)",
+          "GridScope.Modifier.align(Alignment)",
+          "GridScope.Modifier.fillMaxMainAxisSize(fraction: Float = 1.0f)"
+        ],
+        "coverage": "COMPLETE_ORIGINAL_SOURCE_COMPILE_AND_PUBLICATION_REQUIRED"
+      },
+      {
+        "member": "commonMain/com/cheonjaeung/compose/grid/GridScopeModifiers.kt",
+        "declarations": [],
+        "coverage": "COMPLETE_ORIGINAL_SOURCE_COMPILE_AND_PUBLICATION_REQUIRED"
+      },
+      {
+        "member": "commonMain/com/cheonjaeung/compose/grid/GridTrack.kt",
+        "declarations": [
+          "GridTrack",
+          "GridTrack.Fixed(size: Dp) data class, size plus generated data-class members",
+          "GridTrack.Weight(weight: Float) data class, weight plus generated data-class members"
+        ],
+        "coverage": "COMPLETE_ORIGINAL_SOURCE_COMPILE_AND_PUBLICATION_REQUIRED"
+      },
+      {
+        "member": "commonMain/com/cheonjaeung/compose/grid/LayoutOrientation.kt",
+        "declarations": [],
+        "coverage": "COMPLETE_ORIGINAL_SOURCE_COMPILE_AND_PUBLICATION_REQUIRED"
+      },
+      {
+        "member": "commonMain/com/cheonjaeung/compose/grid/MeasurablePlaceableUtils.kt",
+        "declarations": [],
+        "coverage": "COMPLETE_ORIGINAL_SOURCE_COMPILE_AND_PUBLICATION_REQUIRED"
+      },
+      {
+        "member": "commonMain/com/cheonjaeung/compose/grid/OrientationIndependentConstraints.kt",
+        "declarations": [],
+        "coverage": "COMPLETE_ORIGINAL_SOURCE_COMPILE_AND_PUBLICATION_REQUIRED"
+      },
+      {
+        "member": "commonMain/com/cheonjaeung/compose/grid/SequentialGridMeasurePolicy.kt",
+        "declarations": [],
+        "coverage": "COMPLETE_ORIGINAL_SOURCE_COMPILE_AND_PUBLICATION_REQUIRED"
+      },
+      {
+        "member": "commonMain/com/cheonjaeung/compose/grid/SimpleGridCells.kt",
+        "declarations": [
+          "SimpleGridCells",
+          "SimpleGridCells.Density.calculateCrossAxisCellSizes(Int, Int): List<Int>",
+          "SimpleGridCells.fillCellSize(): Boolean",
+          "SimpleGridCells.Fixed(count: Int, fill: Boolean = true)",
+          "SimpleGridCells.Adaptive(minSize: Dp, fill: Boolean = true)",
+          "SimpleGridCells.FixedSize(size: Dp, fill: Boolean = true)",
+          "Fixed/Adaptive/FixedSize calculateCrossAxisCellSizes/fillCellSize/equals/hashCode overrides"
+        ],
+        "coverage": "COMPLETE_ORIGINAL_SOURCE_COMPILE_AND_PUBLICATION_REQUIRED"
+      }
+    ],
+    "runtimeCoverage": [
+      "Main VerticalGrid Adaptive swatches",
+      "Main VerticalGrid Fixed 2/4/8",
+      "One same-case RTL run"
+    ],
+    "unrunApis": "HorizontalGrid, BoxGrid, FixedSize, ExtendedGridCells, GridTrack, span and all other unused APIs have no separate runtime fixture."
+  },
+  "sources": {
+    "path": "vendor/grid-2.8.0-sources.jar",
+    "size": 22247,
+    "sha256": "0f3a18a809277fe24ab10238bca579434c3262eb3ebd6bb9b59bc936c5a7d089"
+  },
+  "pom": {
+    "path": "vendor/grid-2.8.0.pom",
+    "size": 2370,
+    "sha256": "6458584fd5a0e469df5a34bcab605784e564c63099773c01282330f3a245848f"
+  },
+  "gmm": {
+    "path": "vendor/grid-2.8.0.module",
+    "size": 11135,
+    "sha256": "40b6b625eb9e0377501ae82f1d0a486124642849a26bea86270f217649b8f8a7"
+  },
+  "upstreamBuild": {
+    "path": "vendor/upstream-build.gradle.kts",
+    "size": 2549,
+    "sha256": "07c695599b2c5aca355ddf491922f0a83dbcaba558509fce3d9a2dcb2971e267"
+  },
+  "license": {
+    "path": "legal/LICENSE.txt",
+    "size": 11358,
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  }
+}
