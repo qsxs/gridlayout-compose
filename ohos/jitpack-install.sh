@@ -27,7 +27,10 @@ if [[ "$VERSION" =~ ^[0-9a-fA-F]{7,40}$ && "$checkout_commit" != "${VERSION,,}"*
     printf '%s\n' 'JitPack commit VERSION does not identify this checkout' >&2
     exit 1
 fi
-# 在下载大归档之前确认公共工具已锁真实 commit。
+# 在下载大归档之前选择构建宿主，并确认公共工具已锁真实 commit。
+source "$PORT_HOME/bootstrap-python.sh"
+printf 'Build-host runtime: '
+python3 --version
 python3 -B - "$PORT_HOME/tooling-lock.json" <<'PY'
 import json
 from pathlib import Path
@@ -45,6 +48,26 @@ export KONAN_DATA_DIR="$PORT_HOME/.local/konan"
 unset CPF_PORT_TOOLING CPF_MAVEN_CACHE
 port_args=(--jdk "$JAVA_HOME" --native-home "$CPF_NATIVE_HOME" --konan-data "$KONAN_DATA_DIR"
            --repository "$HOME/.m2/repository" --group "${GROUP}.${ARTIFACT}" --version "$VERSION")
+port_work=""
 for stage in Prepare Tasks Resolve Metadata NativeX64 NativeArm64 PublishLocal Verify; do
-    python3 -B "$PORT_HOME/GridPort.py" "$stage" "${port_args[@]}" --online
+    if stage_output="$(python3 -B "$PORT_HOME/GridPort.py" "$stage" "${port_args[@]}" --online)"; then
+        printf '%s\n' "$stage_output"
+        if [[ "$stage" == Prepare ]]; then
+            port_work="$(printf '%s\n' "$stage_output" | python3 -c 'import json, sys; print(json.load(sys.stdin)["work"])')"
+        fi
+    else
+        stage_status="$?"
+        printf '%s\n' "$stage_output"
+        # 只输出当前失败阶段的编译日志尾部，不输出回执或环境。
+        if [[ -n "$port_work" ]]; then
+            for stream in stdout stderr; do
+                stage_log="$port_work/invocations/$stage-1.$stream.log"
+                if [[ -f "$stage_log" ]]; then
+                    printf '%s\n' "Failed $stage: last 80 lines of $stream" >&2
+                    tail -n 80 "$stage_log" >&2 || true
+                fi
+            done
+        fi
+        exit "$stage_status"
+    fi
 done

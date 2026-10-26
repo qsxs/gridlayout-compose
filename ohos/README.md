@@ -66,7 +66,11 @@ JitPack 候选坐标为 `com.github.qsxs.gridlayout-compose:grid:<immutable-comm
 
 `bootstrap-linux.json` 固定已核实的 Linux `.08` Native bundle URL、177306208 字节及 SHA256 `014411e74a0a0733aaf5cdcf7883e1b43c66f5b0a9fec390866bb8d459acad9f`。`bootstrap-native.py` 只下载并校验这一个 bundle，解压其原始分发并记录来源、实际 compilerVersion 与本地 receipt；全部归档与输出留在已忽略的 `.local`。标准 Konan 自行按需取得原配置的依赖，不手工填缓存或预装完整 SDK。公共工具必须先锁真实 commit，安装脚本会在大归档下载前检查此门禁，然后完整调用 Prepare/Tasks/Resolve/Metadata/NativeX64/NativeArm64/PublishLocal/Verify；源码、双 ABI 和发布验证均保留。
 
-这些文件是候选入口。JitPack 实际冷构建、15 分钟上限、Konan 按需下载、最终 root/leaf 重定向 GMM/klib 下载和匿名消费均为 NOT_RUN，不能据此宣布 JitPack 已支持。最终验收需要匿名、隔离的远端 consumer，既不使用应用源码、producer 工作区，也不输入开发机 MavenLocal；metadata 和双 ABI 均须通过。
+首轮 JitPack legacy 宿主实际停在 Python 3.10+ 前置检查，尚未进入 producer。第二候选入口在来源 commit 核对成功后，先复用系统 `python3 >= 3.10`；不足时由 `bootstrap-python.sh` 使用 `bootstrap-python.env` 固定的 Astral `20261021` CPython `3.13.17` Linux x86_64 包，核对 35356674 字节与 SHA256 后解压到独立 `.local`。只调整当前安装 shell 的 PATH 并打印真实 Python 版本，不使用 apt/sudo、源码编译或 pip，不改系统 Python。归档自带许可证与运行时保留在本地构建目录，不进入库制品或 Git。
+
+安装脚本从成功 Prepare 的现有摘要取得实际 work 路径；仅某阶段失败时，将该阶段 stdout/stderr 文件的最后各 80 行输出到云日志，并保留原失败退出码。不会输出 invocation JSON 或环境，也不把日志放入 Maven。成功路径保持原八阶段链和双 ABI 校验。
+
+这些文件是第二个候选入口。JitPack 修正后的实际冷构建、15 分钟上限、Konan 按需下载、最终 root/leaf 重定向 GMM/klib 下载和匿名消费均为 NOT_RUN，不能据此宣布 JitPack 已支持。最终验收需要匿名、隔离的远端 consumer，既不使用应用源码、producer 工作区，也不输入开发机 MavenLocal；metadata 和双 ABI 均须通过。
 
 ## 上游同步与来源
 
