@@ -34,6 +34,10 @@ val metadataPins = if (file("metadata-pins.json").isFile) readMap(file("metadata
 val metadataTools = readMap(file("metadata-toolchain.json"))
 val launcherPins = asMap(metadataTools.getValue("launcherPins"))
 val launcherArtifacts = asMap(metadataTools.getValue("launcherArtifacts"))
+val commonizerTools = readMap(file("commonizer-toolchain.json"))
+val commonizerPins = launcherPins + asMap(commonizerTools.getValue("pins"))
+val commonizerArtifacts = launcherArtifacts + asMap(commonizerTools.getValue("artifacts"))
+check(commonizerTools["compilerVersion"] == config["kotlin"])
 val fingerprint = providers.gradleProperty("portFingerprint").get()
 val work = file(providers.gradleProperty("portWork").get()).canonicalFile
 check(fingerprint.matches(Regex("[0-9a-f]{64}")))
@@ -62,6 +66,12 @@ kotlin {
     }
 }
 configurations.configureEach {
+    // 仅锁定标准 commonizer 的 JVM 工具配置，不进入库的 Native 业务图。
+    if (name == commonizerTools.getValue("configuration").toString()) resolutionStrategy.eachDependency {
+        val ga = "${requested.group}:${requested.name}"
+        val fixed = commonizerPins[ga]?.toString() ?: error("Unreviewed commonizer tool dependency: $ga")
+        if (requested.version != fixed) useVersion(fixed)
+    }
     val metadata = name.endsWith("ResolvableDependenciesMetadata") || name == "allSourceSetsCompileDependenciesMetadata"
     val runtime = metadata || name.endsWith("CompileKlibraries") || name.endsWith("CompilationDependenciesMetadata")
     if (runtime && !name.contains("Test", ignoreCase = true)) resolutionStrategy.eachDependency {
@@ -247,12 +257,37 @@ fun resolution() = listOf("commonMainResolvableDependenciesMetadata", "ohosX64Co
         mapOf("component" to id.displayName, "attributes" to attrs, "files" to records(leaves(artifact.file)))
     })
 }
+fun commonizerRecords(): Map<String, Any> {
+    val configuration = configurations.getByName(commonizerTools.getValue("configuration").toString())
+    val artifacts = configuration.resolvedConfiguration.resolvedArtifacts.map { artifact ->
+        val id = artifact.moduleVersion.id
+        val ga = "${id.group}:${id.name}"
+        check(commonizerPins[ga] == id.version) { "Unpinned commonizer tool: $id" }
+        val expected = asMap(commonizerArtifacts.getValue(ga))
+        val hash = sha(artifact.file)
+        check(hash == expected.getValue("sha256") && artifact.file.length() == (expected.getValue("size") as Number).toLong()) {
+            "Commonizer tool bytes differ: $id"
+        }
+        mapOf("gav" to id.toString(), "path" to artifact.file.absolutePath, "sha256" to hash, "size" to artifact.file.length())
+    }
+    check(artifacts.map { it.getValue("gav") }.toSet() == commonizerPins.map { "${it.key}:${it.value}" }.toSet()) {
+        "Commonizer tool artifact set differs"
+    }
+    val edges = configuration.incoming.resolutionResult.allDependencies.map { edge ->
+        if (edge !is ResolvedDependencyResult) throw GradleException("Unresolved commonizer tool dependency: $edge", (edge as? UnresolvedDependencyResult)?.failure)
+        mapOf("from" to edge.from.id.displayName, "requested" to edge.requested.displayName, "selected" to edge.selected.id.displayName)
+    }
+    return mapOf("configuration" to configuration.name, "edges" to edges,
+        "artifacts" to artifacts.sortedBy { it.getValue("gav").toString() })
+}
+
 tasks.register("resolveGrid") {
     doLast {
         check(gradle.gradleVersion == config.getValue("gradle"))
         listOf("compileCommonMainKotlinMetadata", "compileCommonMainWithMetadataCli", "allMetadataJar", "compileKotlinOhosX64", "compileKotlinOhosArm64").forEach { tasks.getByName(it) }
         evidence("resolve", mapOf("fingerprint" to fingerprint, "toolchain" to toolchain(),
-            "metadataLauncher" to metadataLauncherRecords(configurations.getByName("commonMetadataCliLauncher")), "configurations" to resolution()))
+            "metadataLauncher" to metadataLauncherRecords(configurations.getByName("commonMetadataCliLauncher")),
+            "commonizer" to commonizerRecords(), "configurations" to resolution()))
     }
 }
 fun recordStage(name: String, target: String?) {

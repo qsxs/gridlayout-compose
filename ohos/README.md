@@ -10,6 +10,10 @@ Kotlin/KGP/Native/Compose compiler 固定 `2.4.20-0.1.0-08`，Compose 依赖固�
 
 冻结原端口曾因原 JvmInline 注解触发标准 common metadata 的 OptionalExpectation 错误，故仅 common metadata 沿用同版本公共 `KotlinMetadataCompiler` JavaExec；双 ABI 继续标准 KGP。八个 launcher 的 GAV、大小、SHA256 锁保留，JavaExec 继承原 KGP 的 sources、libraries、插件、插件参数与所有语言/API/optIn/freeCompilerArgs/explicitApi 语义。原 metadata 任务禁用，common 输出和 builtBy 唯一绑定公共 CLI 的真实 Klib；验证继续核对参数文件、退出码、launcher、绑定、真实产物和十八原源。此为既有端口编译入口的迁移，不表示已确定 CPF 编译器前端根因。
 
+第二次云试点已实际通过宿主 Python/Native bootstrap、Prepare、Tasks 与 Resolve，随后 Metadata 的标准 `commonizeNativeDistribution` 因 CPF 仓内容白名单漏掉 commonizer JVM 工具而失败。`commonizer-toolchain.json` 仅新增固定 `.08` 的 `kotlin-klib-commonizer-embeddable`，其 compiler/stdlib 等传递闭包复用原八项 launcher 内容锁；这是一套独立 host 工具输入，既不作为 metadata JavaExec 的第九项 launcher，也不加入 117/15 库依赖图。POM 原件与工具 JAR 来源/大小/SHA256 一并保留，构建配方身份包含该新清单与 POM。
+
+Resolve 现在会提前解析原 KGP 的 `kotlinKlibCommonizerClasspath`，记录其边和实际九项工具 JAR，并按精确 GAV、大小和 SHA256 校验，避免冷工具缺项继续到 Metadata 才发现。标准 commonization、源集与双 ABI 校验保持启用。这个冷工具闭包修正尚未运行真实 Gradle 或第三次云试点，不能据第二次 Resolve 通过推定新闭包已成功。
+
 ## 独立使用
 
 需要 Python 3.10+、JDK 17 和固定 `.08` Kotlin/Native 分发。本入口只编译 Kotlin klib，标准 Konan 使用分发原有配置按需下载其固定 OHOS sysroot/LLVM 依赖，不要求安装 DevEco 或外部 SDK。外部 SDK 仅供显式需要它的扩展入口可选透传；不改 `konan.properties`，不替换依赖版本。路径通过参数或环境注入，不读取应用仓库配置：

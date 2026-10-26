@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "configuration": "kotlinKlibCommonizerClasspath",
+  "compilerVersion": "2.4.20-0.1.0-08",
+  "scope": "HOST_JVM_COMMONIZER_TOOL_ONLY",
+  "inheritsLauncherToolchain": "metadata-toolchain.json",
+  "pins": {
+    "org.jetbrains.kotlin:kotlin-klib-commonizer-embeddable": "2.4.20-0.1.0-08"
+  },
+  "artifacts": {
+    "org.jetbrains.kotlin:kotlin-klib-commonizer-embeddable": {
+      "size": 3843199,
+      "sha256": "9ff11589b4ef1fab248928726e58a790bf082bc23ff8805ec2e59537dc909d58",
+      "url": "https://maven.eazytec-cloud.com/nexus/repository/maven-develop/org/jetbrains/kotlin/kotlin-klib-commonizer-embeddable/2.4.20-0.1.0-08/kotlin-klib-commonizer-embeddable-2.4.20-0.1.0-08.jar"
+    }
+  },
+  "directRuntimeDependencies": [
+    "org.jetbrains.kotlin:kotlin-stdlib:2.4.20-0.1.0-08",
+    "org.jetbrains.kotlin:kotlin-compiler-embeddable:2.4.20-0.1.0-08"
+  ],
+  "sourcePom": {
+    "path": "vendor/kotlin-klib-commonizer-embeddable-2.4.20-0.1.0-08.pom",
+    "size": 1657,
+    "sha256": "63572fb57b2546f41b191cb8606db980824918173c070aa8b97018f76f981c46",
+    "url": "https://maven.eazytec-cloud.com/nexus/repository/maven-develop/org/jetbrains/kotlin/kotlin-klib-commonizer-embeddable/2.4.20-0.1.0-08/kotlin-klib-commonizer-embeddable-2.4.20-0.1.0-08.pom"
+  }
+}
