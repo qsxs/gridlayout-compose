@@ -6,6 +6,8 @@
 
 GridLayout for Compose is a library that provides missing non-lazy grid layout composables for Compose Multiplatform.
 
+OHOS/CPF 独立构建、已验临时 Maven 坐标及维护边界见 [ohos/README.md](ohos/README.md)。
+
 ![grid-examples](docs/images/grid-overview-examples.png)
 
 Jetpack Compose doesn't offer non-lazy grid layouts, providing only lazy grids and alternatives (e.g., flow layouts).
