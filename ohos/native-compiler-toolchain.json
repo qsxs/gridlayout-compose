@@ -1,0 +1,224 @@
+{
+  "schemaVersion": 1,
+  "configuration": "kotlinCompilerClasspath",
+  "scope": "NATIVE_COMPILER_HOST_JVM_ONLY",
+  "compilerVersion": "2.4.20-0.1.0-08",
+  "compilerTasks": [
+    "compileKotlinOhosX64",
+    "compileKotlinOhosArm64"
+  ],
+  "roots": [
+    "org.jetbrains.kotlin:kotlin-build-tools-compat:2.4.20-0.1.0-08",
+    "org.jetbrains.kotlin:kotlin-build-tools-impl:2.4.20-0.1.0-08"
+  ],
+  "pins": {
+    "org.jetbrains.kotlin:kotlin-build-tools-api": "2.4.20-0.1.0-08",
+    "org.jetbrains.kotlin:kotlin-build-tools-compat": "2.4.20-0.1.0-08",
+    "org.jetbrains.kotlin:kotlin-build-tools-cri-impl": "2.4.20-0.1.0-08",
+    "org.jetbrains.kotlin:kotlin-build-tools-impl": "2.4.20-0.1.0-08",
+    "org.jetbrains.kotlin:kotlin-compiler-embeddable": "2.4.20-0.1.0-08",
+    "org.jetbrains.kotlin:kotlin-compiler-runner": "2.4.20-0.1.0-08",
+    "org.jetbrains.kotlin:kotlin-daemon-client": "2.4.20-0.1.0-08",
+    "org.jetbrains.kotlin:kotlin-daemon-embeddable": "2.4.20-0.1.0-08",
+    "org.jetbrains.kotlin:kotlin-reflect": "1.6.10",
+    "org.jetbrains.kotlin:kotlin-script-runtime": "2.4.20-0.1.0-08",
+    "org.jetbrains.kotlin:kotlin-stdlib": "2.4.20-0.1.0-08",
+    "org.jetbrains.kotlin:kotlin-tooling-core": "2.4.20-0.1.0-08",
+    "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm": "1.8.0",
+    "org.jetbrains:annotations": "23.0.0"
+  },
+  "artifacts": {
+    "org.jetbrains.kotlin:kotlin-build-tools-api": {
+      "sha256": "0573955df509866a45469bc78c76704fd54315a9027609a2dbe0b8027abb4266",
+      "size": 468283,
+      "identitySource": "metadata-toolchain.json#launcherArtifacts/org.jetbrains.kotlin:kotlin-build-tools-api"
+    },
+    "org.jetbrains.kotlin:kotlin-build-tools-compat": {
+      "size": 135987,
+      "sha256": "35beab821e6035da8ebbbcb50230f6d3449513bf4c48f7d3a92675bfbf48e89f",
+      "url": "https://maven.eazytec-cloud.com/nexus/repository/maven-develop/org/jetbrains/kotlin/kotlin-build-tools-compat/2.4.20-0.1.0-08/kotlin-build-tools-compat-2.4.20-0.1.0-08.jar"
+    },
+    "org.jetbrains.kotlin:kotlin-build-tools-cri-impl": {
+      "size": 568970,
+      "sha256": "c87fe846d13f1a010cc6ac6e6fe9a0dcbf1ab2f97916b1de2d71ab539c4fb1a3",
+      "url": "https://maven.eazytec-cloud.com/nexus/repository/maven-develop/org/jetbrains/kotlin/kotlin-build-tools-cri-impl/2.4.20-0.1.0-08/kotlin-build-tools-cri-impl-2.4.20-0.1.0-08.jar"
+    },
+    "org.jetbrains.kotlin:kotlin-build-tools-impl": {
+      "size": 3455890,
+      "sha256": "9fab4101277a0d8076028654b3ff74f57cb3d28677d3155d4b6580e0822fb720",
+      "url": "https://maven.eazytec-cloud.com/nexus/repository/maven-develop/org/jetbrains/kotlin/kotlin-build-tools-impl/2.4.20-0.1.0-08/kotlin-build-tools-impl-2.4.20-0.1.0-08.jar"
+    },
+    "org.jetbrains.kotlin:kotlin-compiler-embeddable": {
+      "sha256": "95b0a5de08917b9ad8065df1d4e30262a779b0863c26fbddbdf9ec41e5a35cf6",
+      "size": 58620712,
+      "identitySource": "metadata-toolchain.json#launcherArtifacts/org.jetbrains.kotlin:kotlin-compiler-embeddable"
+    },
+    "org.jetbrains.kotlin:kotlin-compiler-runner": {
+      "size": 20376,
+      "sha256": "1f545be0a1bbf8c3fcd2f405f2a4dd71f86c11508bde12a940a0eca0bf0e9f00",
+      "url": "https://maven.eazytec-cloud.com/nexus/repository/maven-develop/org/jetbrains/kotlin/kotlin-compiler-runner/2.4.20-0.1.0-08/kotlin-compiler-runner-2.4.20-0.1.0-08.jar"
+    },
+    "org.jetbrains.kotlin:kotlin-daemon-client": {
+      "size": 265901,
+      "sha256": "b6e46c6b36eba479aad54ac06498fdf16ba64681ae31bf6410c48483a040dc38",
+      "url": "https://maven.eazytec-cloud.com/nexus/repository/maven-develop/org/jetbrains/kotlin/kotlin-daemon-client/2.4.20-0.1.0-08/kotlin-daemon-client-2.4.20-0.1.0-08.jar"
+    },
+    "org.jetbrains.kotlin:kotlin-daemon-embeddable": {
+      "sha256": "b97441a51c100056a7d3e5cf374f69bbeff799a41cfbbc148307b748369db4d5",
+      "size": 393417,
+      "identitySource": "metadata-toolchain.json#launcherArtifacts/org.jetbrains.kotlin:kotlin-daemon-embeddable"
+    },
+    "org.jetbrains.kotlin:kotlin-reflect": {
+      "sha256": "3277ac102ae17aad10a55abec75ff5696c8d109790396434b496e75087854203",
+      "size": 3038560,
+      "identitySource": "metadata-toolchain.json#launcherArtifacts/org.jetbrains.kotlin:kotlin-reflect"
+    },
+    "org.jetbrains.kotlin:kotlin-script-runtime": {
+      "sha256": "1a040207c69fe0b7accb8e70577cd74c83af14a032ccf1c2978b8547ac04f87a",
+      "size": 46538,
+      "identitySource": "metadata-toolchain.json#launcherArtifacts/org.jetbrains.kotlin:kotlin-script-runtime"
+    },
+    "org.jetbrains.kotlin:kotlin-stdlib": {
+      "sha256": "c2bc31023f6e93219c4aa39a358aa7caeeef7c9addbecfed9ad959f68d9db250",
+      "size": 1853392,
+      "identitySource": "metadata-toolchain.json#launcherArtifacts/org.jetbrains.kotlin:kotlin-stdlib"
+    },
+    "org.jetbrains.kotlin:kotlin-tooling-core": {
+      "size": 89152,
+      "sha256": "5fc5db083803232857408ed5c25bcc307c703b04bdef6cb2c34ebf4db611a622",
+      "url": "https://maven.eazytec-cloud.com/nexus/repository/maven-develop/org/jetbrains/kotlin/kotlin-tooling-core/2.4.20-0.1.0-08/kotlin-tooling-core-2.4.20-0.1.0-08.jar"
+    },
+    "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm": {
+      "sha256": "9860906a1937490bf5f3b06d2f0e10ef451e65b95b269f22daf68a3d1f5065c5",
+      "size": 1548360,
+      "identitySource": "metadata-toolchain.json#launcherArtifacts/org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm"
+    },
+    "org.jetbrains:annotations": {
+      "size": 29371,
+      "sha256": "7b0f19724082cbfcbc66e5abea2b9bc92cf08a1ea11e191933ed43801eb3cd05",
+      "url": "https://repo.maven.apache.org/maven2/org/jetbrains/annotations/23.0.0/annotations-23.0.0.jar"
+    }
+  },
+  "sourcePoms": [
+    {
+      "gav": "org.jetbrains.kotlin:kotlin-build-tools-api:2.4.20-0.1.0-08",
+      "path": "vendor/native-compiler-host/kotlin-build-tools-api-2.4.20-0.1.0-08.pom",
+      "size": 1146,
+      "sha256": "0c92c737538279dce88476b7d3bd06cbddb4f939b731566b539d13588589f579",
+      "url": "https://maven.eazytec-cloud.com/nexus/repository/maven-develop/org/jetbrains/kotlin/kotlin-build-tools-api/2.4.20-0.1.0-08/kotlin-build-tools-api-2.4.20-0.1.0-08.pom"
+    },
+    {
+      "gav": "org.jetbrains.kotlin:kotlin-build-tools-compat:2.4.20-0.1.0-08",
+      "path": "vendor/native-compiler-host/kotlin-build-tools-compat-2.4.20-0.1.0-08.pom",
+      "size": 1392,
+      "sha256": "e75e821de06e320b924d3b16da9744ff1aaa86f9f4f17911016efca18b2b39d9",
+      "url": "https://maven.eazytec-cloud.com/nexus/repository/maven-develop/org/jetbrains/kotlin/kotlin-build-tools-compat/2.4.20-0.1.0-08/kotlin-build-tools-compat-2.4.20-0.1.0-08.pom"
+    },
+    {
+      "gav": "org.jetbrains.kotlin:kotlin-build-tools-cri-impl:2.4.20-0.1.0-08",
+      "path": "vendor/native-compiler-host/kotlin-build-tools-cri-impl-2.4.20-0.1.0-08.pom",
+      "size": 1597,
+      "sha256": "1a061cdf4b67673d2cf893bf5bf141468c997564a5ff0d1d565825b9f6488f2a",
+      "url": "https://maven.eazytec-cloud.com/nexus/repository/maven-develop/org/jetbrains/kotlin/kotlin-build-tools-cri-impl/2.4.20-0.1.0-08/kotlin-build-tools-cri-impl-2.4.20-0.1.0-08.pom"
+    },
+    {
+      "gav": "org.jetbrains.kotlin:kotlin-build-tools-impl:2.4.20-0.1.0-08",
+      "path": "vendor/native-compiler-host/kotlin-build-tools-impl-2.4.20-0.1.0-08.pom",
+      "size": 2411,
+      "sha256": "9890c4b0206b609c15e06434fa5e00ed14319c43951fbbed32c29c15a3f5a704",
+      "url": "https://maven.eazytec-cloud.com/nexus/repository/maven-develop/org/jetbrains/kotlin/kotlin-build-tools-impl/2.4.20-0.1.0-08/kotlin-build-tools-impl-2.4.20-0.1.0-08.pom"
+    },
+    {
+      "gav": "org.jetbrains.kotlin:kotlin-compiler-embeddable:2.4.20-0.1.0-08",
+      "path": "vendor/native-compiler-host/kotlin-compiler-embeddable-2.4.20-0.1.0-08.pom",
+      "size": 2692,
+      "sha256": "448c9621d4b0a4f03b446f0fbacfdad0b7d5bba7f028c60e65a5b88f7a8a83cb",
+      "url": "https://maven.eazytec-cloud.com/nexus/repository/maven-develop/org/jetbrains/kotlin/kotlin-compiler-embeddable/2.4.20-0.1.0-08/kotlin-compiler-embeddable-2.4.20-0.1.0-08.pom"
+    },
+    {
+      "gav": "org.jetbrains.kotlin:kotlin-compiler-runner:2.4.20-0.1.0-08",
+      "path": "vendor/native-compiler-host/kotlin-compiler-runner-2.4.20-0.1.0-08.pom",
+      "size": 1951,
+      "sha256": "8b636f0efcd09742dffeaa7e00611ee92d1bcff6c050e418e272ee102921cf35",
+      "url": "https://maven.eazytec-cloud.com/nexus/repository/maven-develop/org/jetbrains/kotlin/kotlin-compiler-runner/2.4.20-0.1.0-08/kotlin-compiler-runner-2.4.20-0.1.0-08.pom"
+    },
+    {
+      "gav": "org.jetbrains.kotlin:kotlin-daemon-client:2.4.20-0.1.0-08",
+      "path": "vendor/native-compiler-host/kotlin-daemon-client-2.4.20-0.1.0-08.pom",
+      "size": 1362,
+      "sha256": "6554544779db9a147aec2b6a343da69796c872280750320c2929b673252af7e9",
+      "url": "https://maven.eazytec-cloud.com/nexus/repository/maven-develop/org/jetbrains/kotlin/kotlin-daemon-client/2.4.20-0.1.0-08/kotlin-daemon-client-2.4.20-0.1.0-08.pom"
+    },
+    {
+      "gav": "org.jetbrains.kotlin:kotlin-daemon-embeddable:2.4.20-0.1.0-08",
+      "path": "vendor/native-compiler-host/kotlin-daemon-embeddable-2.4.20-0.1.0-08.pom",
+      "size": 1182,
+      "sha256": "6776aaee9ff9abda0150adf23d522c5b1a53dcf6d35e78c7f65560f5163f9128",
+      "url": "https://maven.eazytec-cloud.com/nexus/repository/maven-develop/org/jetbrains/kotlin/kotlin-daemon-embeddable/2.4.20-0.1.0-08/kotlin-daemon-embeddable-2.4.20-0.1.0-08.pom"
+    },
+    {
+      "gav": "org.jetbrains.kotlin:kotlin-reflect:1.6.10",
+      "path": "vendor/native-compiler-host/kotlin-reflect-1.6.10.pom",
+      "size": 1375,
+      "sha256": "57905524274a00ae028aaccc27283f6bc5925a934a046c1cc5d06c8ee4d6d5a9",
+      "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-reflect/1.6.10/kotlin-reflect-1.6.10.pom"
+    },
+    {
+      "gav": "org.jetbrains.kotlin:kotlin-script-runtime:2.4.20-0.1.0-08",
+      "path": "vendor/native-compiler-host/kotlin-script-runtime-2.4.20-0.1.0-08.pom",
+      "size": 1143,
+      "sha256": "9126f7d26568d0ce52dce9ab2ef8dd9d0f199617a4a3452cff62dfa80774b94a",
+      "url": "https://maven.eazytec-cloud.com/nexus/repository/maven-develop/org/jetbrains/kotlin/kotlin-script-runtime/2.4.20-0.1.0-08/kotlin-script-runtime-2.4.20-0.1.0-08.pom"
+    },
+    {
+      "gav": "org.jetbrains.kotlin:kotlin-stdlib:2.4.20-0.1.0-08",
+      "path": "vendor/native-compiler-host/kotlin-stdlib-2.4.20-0.1.0-08.pom",
+      "size": 2319,
+      "sha256": "95fa99bc5463f6d8293c5ec09732b9088189a99fd5988025da3bda35f0736854",
+      "url": "https://maven.eazytec-cloud.com/nexus/repository/maven-develop/org/jetbrains/kotlin/kotlin-stdlib/2.4.20-0.1.0-08/kotlin-stdlib-2.4.20-0.1.0-08.pom"
+    },
+    {
+      "gav": "org.jetbrains.kotlin:kotlin-tooling-core:2.4.20-0.1.0-08",
+      "path": "vendor/native-compiler-host/kotlin-tooling-core-2.4.20-0.1.0-08.pom",
+      "size": 1137,
+      "sha256": "2b51096477fc8eb79b3cf9c120d760cd7f5759f896d8e968b636e5cf4418927f",
+      "url": "https://maven.eazytec-cloud.com/nexus/repository/maven-develop/org/jetbrains/kotlin/kotlin-tooling-core/2.4.20-0.1.0-08/kotlin-tooling-core-2.4.20-0.1.0-08.pom"
+    },
+    {
+      "gav": "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.8.0",
+      "path": "vendor/native-compiler-host/kotlinx-coroutines-core-jvm-1.8.0.pom",
+      "size": 2196,
+      "sha256": "a5633abd53467ceb91622d81f2e982080877145e0b76e1b75788715434885d0b",
+      "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.8.0/kotlinx-coroutines-core-jvm-1.8.0.pom"
+    },
+    {
+      "gav": "org.jetbrains:annotations:23.0.0",
+      "path": "vendor/native-compiler-host/annotations-23.0.0.pom",
+      "size": 1354,
+      "sha256": "c9490f655132328df2cfbcfdf743f53fc3916d6c1d10437175a6ca6e3a67771c",
+      "url": "https://repo.maven.apache.org/maven2/org/jetbrains/annotations/23.0.0/annotations-23.0.0.pom"
+    }
+  ],
+  "versionSelection": {
+    "status": "EXPLICIT_HOST_POLICY_NOT_PRIOR_OBSERVED_RESOLUTION",
+    "stdlib": {
+      "requested": [
+        "2.2.21",
+        "1.6.10",
+        "1.9.21",
+        "2.4.20-0.1.0-08"
+      ],
+      "selected": "2.4.20-0.1.0-08",
+      "reason": "Keep the fixed compiler family for this separate host configuration"
+    },
+    "annotations": {
+      "requested": [
+        "13.0",
+        "23.0.0"
+      ],
+      "selected": "23.0.0",
+      "reason": "Preserve coroutines1.8.0 POM requirement; do not force old metadata launcher13 across configurations",
+      "otherConfigurations": "metadata launcher and commonizer retain their existing13.0 locks unchanged"
+    }
+  }
+}

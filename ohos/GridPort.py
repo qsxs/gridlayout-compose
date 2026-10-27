@@ -103,7 +103,7 @@ def plan():
     config = load(HERE / "port-config.json")
     recipe_names = ["GridPort.py", "build.gradle.kts", "settings.gradle.kts", "gradle.properties",
                     "port-config.json", "source-inputs.json", "dependency-pins.json", "metadata-pins.json",
-                    "metadata-toolchain.json", "commonizer-toolchain.json", "compiler-plugin-toolchain.json", "tooling-lock.json", "gradlew", "gradlew.bat",
+                    "metadata-toolchain.json", "commonizer-toolchain.json", "compiler-plugin-toolchain.json", "native-compiler-toolchain.json", "tooling-lock.json", "gradlew", "gradlew.bat",
                     "gradle/wrapper/gradle-wrapper.jar", "gradle/wrapper/gradle-wrapper.properties"]
     model = load(HERE / "source-inputs.json")
     recipe_names += [model[key]["path"] for key in ("sources", "pom", "gmm", "upstreamBuild", "license")]
@@ -123,6 +123,14 @@ def plan():
     if any(actual_plugin_pom[key] != plugin_pom[key] for key in ("path", "size", "sha256")):
         raise RuntimeError("Compose compiler plugin POM differs from the pinned original")
     recipe_names.append(plugin_pom["path"])
+    native_host = load(HERE / "native-compiler-toolchain.json")
+    if native_host["compilerVersion"] != config["kotlin"]:
+        raise RuntimeError("Native compiler host version differs from the Kotlin lock")
+    for native_pom in native_host["sourcePoms"]:
+        actual_native_pom = record(HERE / native_pom["path"], HERE)
+        if any(actual_native_pom[key] != native_pom[key] for key in ("path", "size", "sha256")):
+            raise RuntimeError("Native compiler host POM differs: " + native_pom["path"])
+        recipe_names.append(native_pom["path"])
     recipe = [record(HERE / name, HERE) for name in sorted(set(recipe_names))]
     wrapper = config["gradleWrapper"]
     wrapper_inputs = [record(HERE / item["path"], HERE) for item in wrapper["inputs"]]
@@ -192,8 +200,16 @@ def prepare(value):
     tool_pins = {**load(HERE / "metadata-toolchain.json")["launcherPins"],
                  **load(HERE / "commonizer-toolchain.json")["pins"],
                  **load(HERE / "compiler-plugin-toolchain.json")["pins"]}
-    mirror = PORT.mirror_cache(work, {**pins, **tool_pins}, cache_root=OPTIONS.maven_cache,
-                              gradle_api=tuple(config["gradle"].split(".")), tool_allowlist=config["toolAllowlist"])
+    native_host_pins = load(HERE / "native-compiler-toolchain.json")["pins"]
+    mirror_pins = {**pins, **tool_pins}
+    for ga, version in native_host_pins.items():
+        mirror_pins.setdefault(ga, version)
+    # 保留原 annotations13 镜像输入，同时按精确 host 工具规则允许并存23。
+    native_host_rules = [{"group": ga.split(":")[0], "modules": [ga.split(":")[1]], "versions": [version]}
+                         for ga, version in native_host_pins.items()]
+    mirror = PORT.mirror_cache(work, mirror_pins, cache_root=OPTIONS.maven_cache,
+                              gradle_api=tuple(config["gradle"].split(".")),
+                              tool_allowlist=[*config["toolAllowlist"], *native_host_rules])
     write(existing, {**value, "frozenInputs": mirror, "cachePolicy": cache_paths(work, config),
           "gradleDistribution": "PINNED_WRAPPER_OR_EXPLICIT_DISTRIBUTION", "build": "NOT_RUN", "runtime": "NOT_RUN"})
     return value
@@ -504,7 +520,7 @@ def run_gradle(value, stage, attempt, online):
         text = receipt.with_suffix(".stdout.log").read_text(encoding="utf-8-sig", errors="replace")
         names = set(re.findall(r"^\s*([\w:-]+)(?:\s+-|\s*$)", text, flags=re.MULTILINE))
         required = ["compileCommonMainKotlinMetadata", "compileCommonMainWithMetadataCli", "allMetadataJar", "compileKotlinOhosX64", "compileKotlinOhosArm64",
-                    "recordGridMetadata", "recordGridX64", "recordGridArm64", "publishAllPublicationsToPortRepository", "publishToMavenLocal"]
+                    "recordGridMetadata", "recordGridX64", "recordGridArm64", "verifyNativeCompilerHost", "publishAllPublicationsToPortRepository", "publishToMavenLocal"]
         if not set(required).issubset({name.lstrip(":") for name in names}):
             raise RuntimeError("Expected Grid tasks absent from actual tasks --all; inspect before adjusting recipe")
         discovery = {"fingerprint": value["fingerprint"], "requiredTasks": required,

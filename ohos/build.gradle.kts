@@ -42,6 +42,10 @@ val compilerPluginTools = readMap(file("compiler-plugin-toolchain.json"))
 val compilerPluginPins = asMap(compilerPluginTools.getValue("pins"))
 val compilerPluginArtifacts = asMap(compilerPluginTools.getValue("artifacts"))
 check(compilerPluginTools["compilerVersion"] == config["kotlin"])
+val nativeCompilerTools = readMap(file("native-compiler-toolchain.json"))
+val nativeCompilerPins = asMap(nativeCompilerTools.getValue("pins"))
+val nativeCompilerArtifacts = asMap(nativeCompilerTools.getValue("artifacts"))
+check(nativeCompilerTools["compilerVersion"] == config["kotlin"])
 val fingerprint = providers.gradleProperty("portFingerprint").get()
 val work = file(providers.gradleProperty("portWork").get()).canonicalFile
 check(fingerprint.matches(Regex("[0-9a-f]{64}")))
@@ -70,6 +74,12 @@ kotlin {
     }
 }
 configurations.configureEach {
+    // 独立 Native 编译器宿主闭包；不复用 metadata/commonizer 的 annotations13 选择。
+    if (name == nativeCompilerTools.getValue("configuration").toString()) resolutionStrategy.eachDependency {
+        val ga = "${requested.group}:${requested.name}"
+        val fixed = nativeCompilerPins[ga]?.toString() ?: error("Unreviewed Native compiler host dependency: $ga")
+        if (requested.version != fixed) useVersion(fixed)
+    }
     // 仅锁定标准 commonizer 的 JVM 工具配置，不进入库的 Native 业务图。
     if (name == commonizerTools.getValue("configuration").toString()) resolutionStrategy.eachDependency {
         val ga = "${requested.group}:${requested.name}"
@@ -302,13 +312,47 @@ fun compilerPluginRecords() = (compilerPluginTools.getValue("compilerTasks") as 
     mapOf("task" to compiler.path, "artifacts" to artifacts.sortedBy { it.getValue("gav").toString() })
 }
 
+fun nativeCompilerRecords(): Map<String, Any> {
+    val configuration = configurations.getByName(nativeCompilerTools.getValue("configuration").toString())
+    val artifacts = configuration.resolvedConfiguration.resolvedArtifacts.map { artifact ->
+        val id = artifact.moduleVersion.id
+        val ga = "${id.group}:${id.name}"
+        check(nativeCompilerPins[ga] == id.version) { "Unpinned Native compiler host: $id" }
+        val expected = asMap(nativeCompilerArtifacts.getValue(ga))
+        val hash = sha(artifact.file)
+        check(hash == expected.getValue("sha256") && artifact.file.length() == (expected.getValue("size") as Number).toLong()) {
+            "Native compiler host bytes differ: $id"
+        }
+        mapOf("gav" to id.toString(), "path" to artifact.file.absolutePath, "sha256" to hash, "size" to artifact.file.length())
+    }
+    check(artifacts.size == nativeCompilerPins.size && artifacts.map { it.getValue("gav") }.toSet() ==
+        nativeCompilerPins.map { "${it.key}:${it.value}" }.toSet()) { "Native compiler host artifact set differs" }
+    val edges = configuration.incoming.resolutionResult.allDependencies.map { edge ->
+        if (edge !is ResolvedDependencyResult) throw GradleException("Unresolved Native compiler host dependency: $edge", (edge as? UnresolvedDependencyResult)?.failure)
+        mapOf("from" to edge.from.id.displayName, "requested" to edge.requested.displayName, "selected" to edge.selected.id.displayName)
+    }
+    return mapOf("configuration" to configuration.name, "edges" to edges,
+        "artifacts" to artifacts.sortedBy { it.getValue("gav").toString() })
+}
+
+val verifyNativeCompilerHost = tasks.register("verifyNativeCompilerHost") {
+    group = "verification"
+    description = "核对独立 Native 编译器的完整宿主 JAR 闭包。"
+    outputs.upToDateWhen { false }
+    doLast { evidence("native-compiler-host", mapOf("fingerprint" to fingerprint, "toolchain" to nativeCompilerRecords())) }
+}
+tasks.withType<KotlinNativeCompile>().configureEach {
+    if (name in (nativeCompilerTools.getValue("compilerTasks") as List<*>)) dependsOn(verifyNativeCompilerHost)
+}
+
 tasks.register("resolveGrid") {
     doLast {
         check(gradle.gradleVersion == config.getValue("gradle"))
         listOf("compileCommonMainKotlinMetadata", "compileCommonMainWithMetadataCli", "allMetadataJar", "compileKotlinOhosX64", "compileKotlinOhosArm64").forEach { tasks.getByName(it) }
         evidence("resolve", mapOf("fingerprint" to fingerprint, "toolchain" to toolchain(),
             "metadataLauncher" to metadataLauncherRecords(configurations.getByName("commonMetadataCliLauncher")),
-            "commonizer" to commonizerRecords(), "compilerPlugins" to compilerPluginRecords(), "configurations" to resolution()))
+            "commonizer" to commonizerRecords(), "compilerPlugins" to compilerPluginRecords(),
+            "nativeCompiler" to nativeCompilerRecords(), "configurations" to resolution()))
     }
 }
 fun recordStage(name: String, target: String?) {

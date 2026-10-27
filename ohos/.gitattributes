@@ -1,3 +1,5 @@
 * text=auto eol=lf
 *.bat text eol=lf
 *.jar binary
+# 固定上游 POM 原件保留原字节，避免换行转换破坏来源摘要。
+vendor/native-compiler-host/*.pom -text

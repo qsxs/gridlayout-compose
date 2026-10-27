@@ -89,3 +89,11 @@ JitPack 候选坐标为 `com.github.qsxs.gridlayout-compose:grid:<immutable-comm
 JitPack 三轮试点已结束。第三轮 commonizer 已执行通过，后续 metadata 编译器插件 classpath 暴露 Compose compiler 工具仓白名单缺项；它没有改变库或 Native 基线。`compiler-plugin-toolchain.json` 单独锁定 `.08` Compose compiler JAR 和无依赖 POM，Resolve 从 metadata、OHOS x64/arm64 三个原 KGP 编译任务的公开 `compilerPluginClasspath` 取得真实输入，逐项核字节与完整集合；原八项 launcher、commonizer 九项工具及 117/15 业务图均保持。
 
 后续改用公共工具仓默认分支中的手动 GitHub Actions producer，固定 Grid 40 位 SHA，显式 JDK17/Python3.13、隔离临时目录，执行完整 Publish/Verify 后上传完整 staging 与必要 evidence。新 CI 尚未实际运行。Actions artifacts 只作中转；Root 下载验收后才手动推到独立 `qsxs/cpf-maven` Pages 作临时匿名验收，不自动部署，不改变 App 引用，也不把 MavenCentral/R2 作为本轮部署目标。
+
+## Native compiler 宿主闭包
+
+`native-compiler-toolchain.json` 独立锁定标准 `kotlinCompilerClasspath` 的 compat/impl 两个根与完整 14 项 JVM 宿主 JAR，保留原始 POM 来源和逐项大小/SHA256。七项沿用既有 launcher 的原始内容锁，其余采用已完整下载的真实身份；不把这套 host 配置并入 117 Native、15 metadata、八项 launcher、九项 commonizer 或单项 Compose compiler 插件。
+
+该配置内 stdlib 显式保持 `.08`；annotations 依据 coroutines1.8.0 POM 请求及维护者裁定选 `23.0.0`，旧 metadata/commonizer 的 `13.0` 不变。`versionSelection` 记录 requested/selected 及边界，这不是旧应用或新 host 已实测解析的声称。CPF 仓只增加精确 GAV/version；冻结镜像以精确 host 工具规则支持 annotations13/23 并存，不把旧锁降级或覆盖。
+
+Resolve 先核实际 host 解析边、GAV 完整集合、大小和 SHA256。双 Native 编译任务均依赖每次执行的 `verifyNativeCompilerHost`，不能只靠先前 Resolve 回执跳过；固定 host 回执与 Resolve 摘要由受控 CI evidence 收集。当前仅完成轻量静态检查，新的真实解析、Native 双 ABI、完整 staging 以及 Pages 匿名消费者仍待验收。
